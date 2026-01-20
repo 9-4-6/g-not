@@ -1,4 +1,4 @@
-package com.example.gnote.controller;
+package com.example.gnote.controller.seckill;
 
 import jakarta.annotation.Resource;
 import org.redisson.api.RLock;

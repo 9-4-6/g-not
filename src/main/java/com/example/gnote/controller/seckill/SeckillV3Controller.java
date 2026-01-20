@@ -1,4 +1,4 @@
-package com.example.gnote.controller;
+package com.example.gnote.controller.seckill;
 
 import com.example.gnote.pojo.Result;
 import com.example.gnote.pojo.ResultData;
