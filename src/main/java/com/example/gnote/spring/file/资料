@@ -1,0 +1,4 @@
+容器启动：加载 Bean 定义，存入 BeanFactory；
+创建 Bean：getBean() → doGetBean() → createBean()，完成实例化、属性赋值；
+初始化 Bean：initializeBean() 按顺序执行 Aware 接口 → BeanPostProcessor 前置处理 → @PostConstruct → afterPropertiesSet → init-method → BeanPostProcessor 后置处理；
+销毁 Bean：容器关闭时，按顺序执行 @PreDestroy → destroy → destroy-method

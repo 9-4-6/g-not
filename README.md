@@ -1,47 +1,48 @@
-# g-not
-郭的笔记
-# 1.customeLock
-```java 
-        CustomLock lock = new CustomLock();
-        CountDownLatch latch = new CountDownLatch(2);
+# 🍉 g-note - Java 技术栈学习笔记
 
-        // 线程1获取锁
-        new Thread(() -> {
-            lock.lock();
-            try {
-                System.out.println("线程1获取自定义锁");
-                TimeUnit.MILLISECONDS.sleep(300);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } finally {
-                lock.unlock();
-                System.out.println("线程1释放自定义锁");
-                latch.countDown();
-            }
-        }).start();
-```
+**让学习更简单、更系统、更深入**  
+一个专注 Java 中高级技术的学习 + 实践 + 源码阅读 + 笔记结合的仓库  
+适合用来复习/进阶：并发编程、分布式系统、JVM 调优、Spring 核心原理等
 
-# 2.秒杀
-* 基础版本
-* 分布式锁版本
-* redis+lua脚本版本
-# 3.jmeter工具
-![img.png](src/main/resources/static/pic/jemter.png)
-# 4.java启动命令
+## 📌 项目核心内容（持续更新中）
 
-```bash 
-nohup java -Xms512m -Xmx1024m \
--XX:+UseG1GC \
--XX:MetaspaceSize=256m \
--XX:MaxMetaspaceSize=512m \
--XX:-UseCompressedClassPointers \
--Xlog:gc*=info:file=./logs/gc.log:time,uptime,pid:filecount=5,filesize=100M \
--XX:+HeapDumpOnOutOfMemoryError \
--XX:HeapDumpPath=./logs/heapdump.hprof \
--jar concurrency-in-practice-0.0.1-SNAPSHOT.jar > ./logs/app.log 2>&1 &
-```
-![img.png](src/main/resources/static/pic/gceasy.png)
-# 5.redisson源码分析
-![img.png](src/main/resources/static/pic/img.png)
-# 6.seata源码分析
-![img.png](src/main/resources/static/pic/seata.png)
+1. 自定义锁实现
+2. 秒杀系统多版本演进
+3. JMeter 性能测试工具
+4. Java 生产启动命令（JVM 参数 + GC 日志）
+5. Spring 核心源码（Bean 生命周期）
+6. Seata 分布式事务源码分析
+7. Redisson 源码分析
+
+## 📂 模块功能一览
+
+| 模块目录       | 主要内容                                   |
+|----------------|--------------------------------------------|
+| `lock/`        | 自定义锁各种实现方式                       |
+| `seckill/`     | 秒杀系统多版本实现与演进                   |
+| `redisson/`    | Redisson 分布式锁 / 续期 / Lua 脚本分析    |
+| `seata/`       | Seata 分布式事务源码与实践                 |
+| `spring/`      | Spring 容器、Bean 生命周期、AOP 等源码     |
+
+## 🚀 开源目标 & 当前状态
+
+- **目标**：打造一份**可运行、可调试、可阅读**的 Java 中高级技术栈学习仓库  
+  通过代码 + 详细笔记 + 源码注释 + 压测案例，帮助自己和更多人系统掌握核心原理
+
+- **当前状态**：持续更新中
+    - 核心模块已基本搭建完成
+    - 笔记已覆盖主要章节（Markdown 格式，结构清晰）
+    - 部分模块提供完整可运行 demo（秒杀、自定义锁、Redisson 示例等）
+
+## 欢迎参与
+
+如果你也在学习/复习这些内容，欢迎：
+
+- ⭐ Star 项目，持续关注更新
+- 🍴 Fork 一份自己玩 / 提 PR 补充完善
+- 🐛 Issue 交流问题、分享心得、提优化建议
+
+**一起让 Java 学习更高效、更扎实！** 🚀
+
+---
+最后更新：持续迭代中～ 欢迎常来看看新内容

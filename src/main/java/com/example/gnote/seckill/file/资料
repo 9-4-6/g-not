@@ -1,0 +1,10 @@
+nohup java -Xms512m -Xmx1024m \
+  -XX:+UseG1GC \
+  -XX:MetaspaceSize=256m \
+  -XX:MaxMetaspaceSize=512m \
+  -XX:-UseCompressedClassPointers \
+  -Xlog:gc*=info:file=./logs/gc.log:time,uptime,pid:filecount=5,filesize=100M \
+  -XX:+HeapDumpOnOutOfMemoryError \
+  -XX:HeapDumpPath=./logs/heapdump.hprof \
+  -jar concurrency-in-practice-0.0.1-SNAPSHOT.jar \
+  > ./logs/app.log 2>&1 &

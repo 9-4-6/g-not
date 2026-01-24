@@ -1,7 +1,7 @@
-package com.example.gnote.controller.seckill;
+package com.example.gnote.seckill.controller;
 
-import com.example.gnote.pojo.Result;
-import com.example.gnote.pojo.ResultData;
+import com.example.gnote.seckill.pojo.Result;
+import com.example.gnote.seckill.pojo.ResultData;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.web.bind.annotation.GetMapping;

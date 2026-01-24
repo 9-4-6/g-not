@@ -1,4 +1,4 @@
-package com.example.gnote.pojo;
+package com.example.gnote.seckill.pojo;
 
 import lombok.Data;
 
