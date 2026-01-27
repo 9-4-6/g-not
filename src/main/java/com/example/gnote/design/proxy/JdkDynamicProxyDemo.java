@@ -1,4 +1,4 @@
-package com.example.gnote.proxy;
+package com.example.gnote.design.proxy;
 
 import org.springframework.cglib.proxy.InvocationHandler;
 import org.springframework.cglib.proxy.Proxy;

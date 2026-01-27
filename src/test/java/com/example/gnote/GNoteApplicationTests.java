@@ -1,8 +1,11 @@
 package com.example.gnote;
 
+import com.example.gnote.design.strategy.PaymentStrategy;
+import com.example.gnote.design.strategy.PaymentStrategyFactory;
 import com.example.gnote.lock.CustomLock;
 import com.example.gnote.spring.config.LifecycleConfig;
 import com.example.gnote.spring.lifecycle.MyLifecycleBean;
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -12,6 +15,15 @@ import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
 class GNoteApplicationTests {
+    @Resource
+    private PaymentStrategyFactory paymentStrategyFactory;
+
+    @Test
+    void design(){
+        PaymentStrategy paymentStrategy = paymentStrategyFactory.create(2);
+        paymentStrategy.pay(1L,"2");
+
+    }
     @Test
     void springTest()throws InterruptedException{
        /* ApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationfile.xml");
