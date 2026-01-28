@@ -7,50 +7,115 @@ import java.util.Arrays;
  * @date 2026/1/27
  *
  * 算法名称	快速排序（Quick Sort）
- * 为什么用	1. 性能优：平均时间复杂度 O (n log n)，是工业界最常用的排序算法（JDK Arrays.sort () 底层对基本类型用快排）；
- *          2. 空间省：原地排序（仅递归栈 O (log n)），比归并排序（需 O (n) 额外空间）更省内存；
- *          3. 适配场景：大规模无序数组排序，如后台数据批量排序、搜索前的预处理。
- * 思考逻辑
- *          面对 “数组排序” 需求，首先排除 O (n²) 的冒泡 / 插入（数据量大时性能差）；
- *          归并排序虽稳定但需额外空间，而快排 “分治 + 原地分区” 更契合 “高性能、低内存” 的工业场景；
- * 核心思考：选一个基准值，把数组分成 “小于基准” 和 “大于基准” 两部分，递归处理子数组 —— 用 “分治” 拆解问题，用 “分区” 实现原地排序。
+ * 逻辑：
+ * 步骤一 ：选出一个数作为基数，作为对比基数，把它小的放左边，比它大放右边，临界点 左边等于或者大于右边结束
+ *        注意点 不是左比较一下，右比较一下，交替比较，比如：左比较一下，直到条件不满足，才轮到右比较
+ * 步骤二 ：一次类推，进行递归
+ *
+ * 分步骤实现思路：
+ *        一阶段实现 步骤一
+ *        二阶段实现 在步骤一的基础上实现步骤二 步骤二的临节点 只有一个元素
+ *
+ *
  */
 public class QuickSort {
 
     public static void main(String[] args) {
         int[] arr = {5, 2, 9, 3, 7, 6, 1, 8, 4};
+
+        //思考 步骤一实现（这个是思考的过程，可不看）
+        int pivotValue = arr[arr.length - 1];
+        //定义左移指针 与 右移指针
+        int left =0, right =arr.length - 1;
+        // 这个索引就是基数索引
+        int i = moveLeft(arr, pivotValue, left, right);
+        System.out.println("步骤一:"+Arrays.toString(arr));
+        //----------------------------------------------------------------------------------------------
+        // 最终答案（必看）
         quickSort(arr, 0, arr.length - 1);
-        // [1,2,3,4,5,6,7,8,9]
-        System.out.println(Arrays.toString(arr));
+        System.out.println("最终答案:"+Arrays.toString(arr));
+
     }
 
     public static void quickSort(int[] arr, int low, int high) {
+        //这个递归结束标识
         if (low >= high) {
             return;
         }
+        //基准数索引
         int pivotIdx = partition(arr, low, high);
+        //左递归
         quickSort(arr, low, pivotIdx - 1);
+        //右递归
         quickSort(arr, pivotIdx + 1, high);
     }
 
     private static int partition(int[] arr, int low, int high) {
-        // 选尾元素做基准（也可随机选基准优化）
+        // 选尾元素做基准（也可随机选基准优化,头元素,中间元素）
         int pivot = arr[high];
         // 小于基准的区域指针
-        int i = low - 1;
-        for (int j = low; j < high; j++) {
-            if (arr[j] <= pivot) {
-                i++;
+        int left = low - 1;
+        for (int right = low; right < high;right++) {
+            if (arr[right] <= pivot) {
+                left++;
                 // 交换元素，扩大小于基准的区域
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
             }
         }
         // 基准元素归位
-        int temp = arr[i + 1];
-        arr[i + 1] = arr[high];
+        int temp = arr[left + 1];
+        arr[left + 1] = arr[high];
         arr[high] = temp;
-        return i + 1;
+        return left + 1;
     }
+
+
+
+
+
+
+
+    private static int moveLeft(int[] arr, int pivotValue, int left, int right) {
+        if(left>=right){
+            arr[left] = pivotValue;
+            return left;
+        }
+        if(arr[left]>pivotValue){
+            //如果大于基数，就把该值移动最右边
+            arr[right] = arr[left];
+            right--;
+            moveRight(arr,pivotValue,left,right);
+        }else {
+            left++;
+            //再左移
+            moveLeft(arr,pivotValue,left,right);
+        }
+
+        return left;
+    }
+
+    private static int moveRight(int[] arr, int pivotValue, int left, int right) {
+        if(left>=right){
+            arr[left] = pivotValue;
+            return left;
+        }
+        //右移
+        if(arr[right]<pivotValue){
+            //如果大于基数，就把该值移动最左边
+            arr[left] = arr[right];
+            left++;
+            //左移
+            moveLeft(arr,pivotValue,left,right);
+        }else{
+            right--;
+            //再右移
+            moveRight(arr,pivotValue,left,right);
+        }
+        return left;
+    }
+
+
+
 }
