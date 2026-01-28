@@ -16,6 +16,8 @@ import java.util.Arrays;
  *        一阶段实现 步骤一
  *        二阶段实现 在步骤一的基础上实现步骤二 步骤二的临节点 只有一个元素
  *
+ * 拓展：应用场景 arrays.sort
+ *
  *
  */
 public class QuickSort {
@@ -24,12 +26,14 @@ public class QuickSort {
         int[] arr = {5, 2, 9, 3, 7, 6, 1, 8, 4};
 
         //思考 步骤一实现（这个是思考的过程，可不看）
-        int pivotValue = arr[arr.length - 1];
+       /* int pivotValue = arr[arr.length - 1];
         //定义左移指针 与 右移指针
         int left =0, right =arr.length - 1;
         // 这个索引就是基数索引
         int i = moveLeft(arr, pivotValue, left, right);
-        System.out.println("步骤一:"+Arrays.toString(arr));
+        System.out.println("步骤一:"+Arrays.toString(arr));*/
+        //步骤一:[1, 2, 3, 4, 7, 6, 9, 8, 5]
+
         //----------------------------------------------------------------------------------------------
         // 最终答案（必看）
         quickSort(arr, 0, arr.length - 1);
@@ -44,6 +48,7 @@ public class QuickSort {
         }
         //基准数索引
         int pivotIdx = partition(arr, low, high);
+
         //左递归
         quickSort(arr, low, pivotIdx - 1);
         //右递归
@@ -51,7 +56,7 @@ public class QuickSort {
     }
 
     private static int partition(int[] arr, int low, int high) {
-        // 选尾元素做基准（也可随机选基准优化,头元素,中间元素）
+        // 选尾元素做基准（也可随机选基准优化,头元素,中间元素） 5, 2, 9, 3, 7, 6, 1, 8, 4
         int pivot = arr[high];
         // 小于基准的区域指针
         int left = low - 1;
